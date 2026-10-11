@@ -1,0 +1,143 @@
+    1  ls
+    2  pwd
+    3  ls ..
+    4  ls /home
+    5  ls /usr
+    6  groupadd students
+    7  useradd -u 1234 -m -G students user1
+    8  ls /home
+    9  passwd user1
+   10  ls /home
+   11  chage -M 90 user1
+   12  id user1
+   13  chage -l user1
+   14  sudo reboot
+   15  ps -eo pid,uid,euid,comm | awk '$3==0 && $2!=0'
+   16  find / -perm -4000 -type -f
+   17  find / -perm -4000 -type f
+   18  ps -eo pid,uid,euid,comm | awk '$3==0 && $2!=0'
+   19  ps aux | grep passwd
+   20  ls /usr
+   21  ls /usr/bin
+   22  ls /usr/bin/passwd
+   23  ls -l /usr/bin/passwd
+   24  ps -eo pid,uid,euid,comm | awk '$3==0 && $2!=0'
+   25  ls /var/spool/mail/root
+   26  cat /var/spool/mail/root
+   27  ps -eo pid,uid,euid,comm | awk '$3==0 && $2!=0'
+   28  ps -eo pid,uid,euid,comm | grep -E "su|passwd"
+   29  ps -eo pid,uid,euid,comm | awk '$3==0 && $2!=0'
+   30  ps -eo pid,uid,euid,comm | awk '$3==0 && $2>0'
+   31  ps -eo pid,uid,euid,comm
+   32  dnf install -y openssh-server
+   33  systemctl enable --now sshd
+   34  systemctl status sshd
+   35  ip addr show
+   36  chown root ~/my-cat
+   37  chown root /home/user1/my-cat
+   38  ls -la /home/user1/my-cat
+   39  chmod u+s /home/user1/my-cat
+   40  ls -la /home/user1/my-cat
+   41  ps -eo pid,uid,euid,comm | awk '$3==0 && $2>0'
+   42  ps -eo pid,uid,euid,comm
+   43  ps -eo pid,ruid,euid,comm | awk '$3==0 && $2>0'
+   44  ls
+   45  touch test-file
+   46  ls
+   47  ls -l test-file 
+   48  setcap cap_chown+ep /home/user1/my-chown 
+   49  echo "user1 ALL=(ALL) NOPASSWD: /usr/bin/timedatectl" | tee /etc/sudoers.d/user1-time
+   50  ls -l /etc/sudoers.d/user1-time
+   51  chmod 0440 /etc/sudoers.d/user1-time
+   52  ls -l /etc/sudoers.d/user1-time
+   53  exit
+   54  useradd -u 1234 -m -G students user1
+   55  exit
+   56  ps -eo pid,ruid,euid,comm | awk '$3==0 && $2>0'
+   57  ps -eo pid,ruid,euid,comm | awk '$3==0 && $2!=0'
+   58  exit
+   59  setcap cap_chown+ep /home/user1/my-chown
+   60  exit
+   61  ps -eo pid,ruid,euid,comm | awk '$3==0 && $2 != 0'> /home/user1/procs.out
+   62  exit
+   63  cat /etc/shadow
+   64  cat /etc/shadow > /home/user1/shadow.out
+   65  exit
+   66  cat /etc/sudoers > /home/user1/sudoers.out
+   67  exit
+   68  history
+   69  ls
+   70  pwd
+   71  cd /
+   72  ls
+   73  cd /home
+   74  ls
+   75  cd /home/user1/
+   76  ls
+   77  hostnamectl
+   78  hostnamectl set-hostname mephi-2026.domain.local
+   79  hostnamectl
+   80  ip a
+   81  ping -c 4 8.8.8.8 > ping.out
+   82  ls
+   83  cat ping.out 
+   84  ip -4 addr
+   85  systemctl enable --now sshd
+   86  dnf update -y
+   87  sudo dnf install -y nginx libcap-ng-utils
+   88  cd /tmp
+   89  sudo dnf download tcpdump
+   90  sudo rpm -Uvh tcpdump-*.rpm
+   91  sudo dnf history > ~/dnf.out
+   92  cd ~
+   93  ls
+   94  rm dnf.out
+   95  ls
+   96  cd /home/user1/
+   97  sudo dnf history > dnf.out
+   98  lsblk
+   99  history
+  100  ls
+  101  lsblk
+  102  sudo parted -s /dev/sdb mklabel msdos mkpart primary ext4 1MiB 100%
+  103  sudo partprobe /dev/sdb
+  104  sudo mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+  105  sudo mkdir -p /mephi-web
+  106  echo "LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 0" | sudo tee -a /etc/fstab
+  107  sudo mount /mephi-web
+  108  lsblk -f
+  109  findmnt /mephi-web
+  110  sudo systemctl daemon-reload
+  111  sudo systemctl enable --now nginx
+  112  sudo journalctl -u nginx -b | tee /home/user1/journalctl.out
+  113  systemctl status nginx
+  114  sudo groupadd -g 4444 curators
+  115  sudo useradd -g curators curator1
+  116  sudo useradd -g curators curator2
+  117  sudo groupadd developers
+  118  sudo useradd -u 5501 -G developers user1
+  119  id user1
+  120  sudo usermod -u 5501 user1
+  121  sudo useradd -m -s /bin/bash admin
+  122  sudo passwd admin
+  123  sudo usermod -aG wheel admin
+  124  exit
+  125  ls
+  126  grep curetor /etc/passwd
+  127  grep curator /etc/passwd
+  128  echo "Hello from Student: M265924" | sudo tee /mephi-web/index.html
+  129  curl http://localhost/
+  130  sudo sed -i 's|/usr/share/nginx/html|/mephi-web|g' /etc/nginx/nginx.conf
+  131  sudo sed -i 's|/usr/share/nginx/html|/mephi-web|g' /etc/nginx/conf.d/*.conf 2>dev/null || true
+  132  sudo sed -i 's|/usr/share/nginx/html|/mephi-web|g' /etc/nginx/conf.d/*.conf 2>/dev/null || true
+  133  sudo nginx -t
+  134  sudo systemctl reload mginx
+  135  sudo systemctl reload nginx
+  136  curl http://localhost/
+  137  stat /data/mephi-2026/ > stat.out
+  138  stat /mephi-web/ >> stat.out
+  139  getcap /usr/sbin/tcpdump > getcap.out
+  140  getenforce > getenforce.out
+  141  curl http://localhost/ > curl.out
+  142  ls
+  143  history > history.out
